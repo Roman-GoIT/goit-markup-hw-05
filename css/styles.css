@@ -17,6 +17,7 @@
   /* Others */
   --items: 3;
   --indent: 30px;
+  --animation: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Reset */
@@ -109,8 +110,6 @@ img {
   display: flex;
   gap: 50px;
   align-items: center;
-  padding-top: 32px;
-  padding-bottom: 32px;
 }
 
 .logo {
@@ -137,21 +136,42 @@ img {
 
 .link-header {
   display: block;
+  position: relative;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.link-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: #2196f3;
+  border-radius: 2px;
+  opacity: 0;
+}
+
+.link-header:hover::after {
+  opacity: 1;
 }
 
 .link-header:hover,
 .link-header:focus {
   color: var(--blue-cl);
+  transition: transform var(--animation);
 }
 
 .contact:hover,
 .contact:focus {
   color: var(--blue-cl);
+  transition: transform var(--animation);
 }
 
 .contacts-icon {
-  fill: none;
-  stroke: currentColor;
+  fill: currentColor;
 }
 
 .link-header {
@@ -189,6 +209,8 @@ img {
       rgba(47, 48, 58, 0.4)
     ),
     url(../images/bgnd1.jpg);
+    background-size: cover;
+    background-position: center;
   background-repeat: no-repeat;
 }
 
@@ -226,6 +248,53 @@ img {
   border: transparent;
   border-radius: 4px;
   cursor: pointer;
+}
+
+/* Modal window */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: opacity var(--animation), visibility var(--animation);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 528px;
+  height: 581px;
+  background: #FFFFFF;
+box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+border-radius: 4px;
+}
+
+.modal-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+height: 30px;
+background: #FFFFFF;
+padding: 0;
+border: 1px solid rgba(0, 0, 0, 0.1);
+border-radius: 50%;
+cursor: pointer;
 }
 
 /* Наші переваги */
@@ -317,6 +386,35 @@ img {
   height: auto;
 }
 
+/* Occupation overlay */
+
+.occupation {
+  position: relative;
+}
+
+.occupation-overlay {
+  position: absolute;
+  height: 70px;
+  width: 100%;
+  background-color: rgba(47, 48, 58, 0.8);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+
+  color: var(--light-txt-cl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.occupation-info {
+  display: block;
+  margin: 0;
+}
+
 /* Наша команда */
 
 .team-list {
@@ -388,6 +486,7 @@ img {
 .social-link:focus {
   color: #ffffff;
   background-color: var(--blue-cl);
+  transition: transform var(--animation);
 }
 
 .socials-icon {
@@ -428,6 +527,7 @@ img {
 .clients-link:focus {
   fill: var(--blue-txt-cl);
   border-color: var(--blue-txt-cl);
+  transition: transform var(--animation);
 }
 
 /* Підвал */
@@ -529,8 +629,9 @@ img {
 
 .ftr-social-link:hover,
 .ftr-social-link:focus {
-  color: #ffffff;
+  color: var(--light-txt-cl);
   background-color: var(--blue-cl);
+  transition: transform var(--animation);
 }
 
 .ftr-socials-icon {
@@ -566,7 +667,9 @@ img {
 .btn:focus {
   background: var(--blue-cl);
   color: var(--light-txt-cl);
-  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
+    0px 2px 2px rgba(0, 0, 0, 0.12);
+  transition: transform var(--animation);
   cursor: pointer;
 }
 
@@ -604,7 +707,8 @@ img {
 .project-link:hover,
 .project-link:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
-  1px 4px 6px rgba(0, 0, 0, 0.16);
+    1px 4px 6px rgba(0, 0, 0, 0.16);
+  transition: transform var(--animation);
 }
 
 .project-name {
@@ -629,3 +733,37 @@ img {
   border: 1px solid #eeeeee;
 }
 
+/* Overlay */
+
+.thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: o;
+  left: 0;
+
+  transform: translateY(0);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(33, 150, 243, 0.9);
+  transition: transform var(--animation);
+  padding: 63px 24px;
+}
+.overlay-info {
+  font-size: 18px;
+  line-height: 1.55;
+  /* or 156% */
+  letter-spacing: 0.03em;
+  color: var(--light-txt-cl);
+}
+
+.project:hover .overlay {
+  transform: translateY(-100%);
+}
